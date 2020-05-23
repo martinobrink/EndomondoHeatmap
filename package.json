@@ -1,0 +1,7 @@
+{
+    "dependencies": {
+        "endomondo-api-handler": "5.0.0",
+        "cross-fetch": "3.0.4",
+        "configparser": "*"
+    }
+}

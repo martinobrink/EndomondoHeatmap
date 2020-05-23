@@ -1,0 +1,6 @@
+credentials.cfg
+__pycache__/
+output/
+node_modules/
+workoutdata/
+package-lock.json

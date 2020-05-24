@@ -44,6 +44,8 @@
   <body>
     <div id="floating-panel">
       <button onclick="toggleHeatmap()">Toggle Heatmap</button>
+      <button onclick="toggleYear()">Toggle Year</button>
+      <button onclick="displayAllData()">Display all data</button>
       <button onclick="changeGradient()">Change gradient</button>
       <button onclick="changeRadius()">Change radius</button>
       <button onclick="changeOpacity()">Change opacity</button>
@@ -53,19 +55,23 @@
 
       // This example requires the Visualization library. Include the libraries=visualization
       // parameter when you first load the API. For example:
-      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=visualization">
+      //<script src="https://maps.googleapis.com/maps/api/js?key=<API_KEY>&libraries=visualization">
 
-      var map, heatmap;
+      var map, heatmap, year;
 
       function initMap() {
+        heatmapData = initializeHeatmapData();
+        //TODO get first year of dictionary
+        year = 2016;
+        
         map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 13,
+          zoom: 6,
           center: {lat: 56.161590, lng: 10.130450},
           mapTypeId: 'roadmap'
         });
 
         heatmap = new google.maps.visualization.HeatmapLayer({
-          data: getPoints(),
+          data: heatmapData[year],
           map: map,
 	        maxIntensity: 25,
 	        radius: 5,
@@ -76,7 +82,29 @@
       function toggleHeatmap() {
         heatmap.setMap(heatmap.getMap() ? null : map);
       }
-     function changeGradient() {
+
+      function toggleYear() {
+        year = (year + 1) in heatmapData ? (year + 1) : Math.min (parseInt(Object.keys(heatmapData)));
+        console.log(year);
+        heatmap.setData(heatmapData[year]);
+      }
+
+      function displayAllData() {
+        heatmap.setData(getFlattenedHeatmapData());
+      }
+
+      //Returns all data in dictionary as one long array effectively removing year
+      function getFlattenedHeatmapData() {        
+        var result = Object.keys(heatmapData)
+          .reduce(function (r, k) {
+            return r.concat(heatmapData[k]);
+          }, 
+          []);
+
+        return result;
+      }
+
+      function changeGradient() {
         var gradient = [
           'rgba(0, 255, 255, 0)',
           'rgba(0, 255, 255, 1)',
@@ -104,11 +132,12 @@
         heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
       }
 
-      function getPoints() {
-        return [LIST_OF_POINTS];
-        }
+      function initializeHeatmapData() {
+        return <WORKOUT_YEAR_COORDINATE_DICTIONARY>        
+      }
+
       </script>
       <script async defer
-          src="https://maps.googleapis.com/maps/api/js?key=API_KEY&libraries=visualization&callback=initMap"></script>
+          src="https://maps.googleapis.com/maps/api/js?key=<API_KEY>&libraries=visualization&callback=initMap"></script>
       </body>
 </html>

@@ -16,7 +16,7 @@ $ python3 -m pip install -r requirements.txt
 
 **Add credentials to credentials.cfg file**
 
-Copy contents of credentials-example.cfg into a new file credentials.cfg and replace the segments containing Endomondo and Google credentials. This file has _deliberately_ been added to the .gitignore file so you do NOT add this file to this repo by mistake. 
+Copy contents of 'credentials-example.cfg' into a new file 'credentials.cfg' and replace the segments containing Endomondo and Google credentials. This file ('credentials.cfg') has _deliberately_ been added to the .gitignore file so you do NOT add this file to this repo by mistake. 
 
 ## Downloading Endomondo workouts
 
@@ -30,7 +30,7 @@ node download-endomondo-workouts.js
 $ python3 heatmap.py --input workoutdata --output map
 ```
 
-TBD Currently work in progress in order to get data better segmented into years
+This should generate an html file ('output/map.html'), which displays a Google Maps page with a heatmap overlay from the workout data in your .gpx files. You can cycle through each year of workout data using the 'Toggle year' button in the foating panel at the top. To display all years of data in a single overlay use the 'Display all data' button.
 
 ## More info
 

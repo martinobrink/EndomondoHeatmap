@@ -1,7 +1,8 @@
 {
     "dependencies": {
         "endomondo-api-handler": "5.0.0",
-        "cross-fetch": "3.0.4",
+        "cross-fetch": "3.0.6",
+        "strava-v3": "2.0.9",
         "configparser": "*"
     }
 }
